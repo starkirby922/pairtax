@@ -142,29 +142,32 @@ def func():
     if remainder3 <0:
         remainder3 = 0
 
-    if netincome3 < 3744000:
-        tax3= first3 + second3 + third3 + fourth3 + remainder3
-        tax3=math.floor(tax3)
-        print ("Joint Assestment Tax Total:"+str(tax3))
-    else:
-        tax3 = (netincome3+264000)* 0.15
-        tax3=math.floor(tax3)
-        print ("Joint Assestment Tax Total*Standard Rate:"+str(tax3))
+    
+    tax3= first3 + second3 + third3 + fourth3 + remainder3
+    tax3=math.floor(tax3)
+    
+    stdtax3 = (netincome3+264000)* 0.15
+    stdtax3=math.floor(stdtax3)
+    if stdtax3>=tax3:
+        lsstax3=tax3
+        print ("Joint Assestment Tax Total:"+str(lsstax3))
+    elif stdtax3<=tax3:
+        lsstax3=stdtax3
+        print ("Joint Assestment Tax Total*Standard Rate:"+str(lsstax3))
 
 
 
     seperatetotal = tax +tax2
     print ("Seperate Assestment Tax Total:"+str(seperatetotal))
-   
 
-    if seperatetotal < tax3:  
+    if seperatetotal < lsstax3:  
         print("Seperate Assestment Recommended")
-    elif seperatetotal>tax3:
+    elif seperatetotal>lsstax3:
         print("Joint Assestment Recommended")
     else:
         print("Either Assestment is Recommended")
 
-    return [seperatetotal, tax3]
+    return [seperatetotal, lsstax3]
 
 if __name__ == '__main__':
     func()
